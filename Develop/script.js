@@ -1,32 +1,71 @@
 let addUpper = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-
+console.log(addUpper);
 
 let addLower = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-
+console.log(addLower);
 
 let addNumber = String.fromCharCode(Math.floor(Math.random()* 10) + 48);
-
+console.log(addNumber);
 
 let addSymbols = ['!','@','#','$','%','^','&','*','(',')','_','+']; 
+console.log(addSymbols);
 
+let length = 0
 
-let length = prompt('How many character would you like your password to be?');
+let password = "";
 
+generate.onclick = function(){
+  getLength();
+  getUpper();
+  getNumber();
+  getSym();
+  };
 
-  // Conditional statement to check if password length is a number. Prompts end if this evaluates false
-  if (length === true) {
-    alert('Password length must be provided as a number');
-    return;
+getLength = function (){
+  let length = prompt("How long would you like your password to be?");
+  console.log(length);
+  
+  if (length < 8){
+    prompt("Your characters should be more than 8");
   }
-
-  // Conditional statement to check if password length is at least 8 characters long. Prompts end if this evaluates false
-  if (length < 8) {
-    alert('Password length must be at least 8 characters');
-    return;
+  if (length > 128){
+    prompt("less than 128");
   }
+  return length;
+}
 
-  // Conditional statement to check if password length is less than 128 characters long. Prompts end if this evaluates false
-  if (length > 128) {
-    alert('Password length must less than 129 characters');
-    return;
-  }
+getUpper = function(){
+  let haveUpper = confirm("have upper?");
+  console.log(haveUpper);
+}
+getLower = function(){
+  let haveLower = confirm("have lower");
+  console.log(haveLower);
+}
+getNumber = function(){
+  let haveNumber = confirm("have num");
+  console.log(haveNumber);
+}
+getSym = function(){
+  let haveSym = confirm("have sym");
+  console.log(haveSym);
+}
+
+function generate(){
+  let options = [];
+  if haveUpper == true;
+    options.push(addUpper)
+
+}
+for (var i; i < length; i++){
+  password+= option;
+}
+
+//print password
+document.getElementById("password").innerHTML = password;
+
+//create options array, push all options in "let option = [fjakjfka]"
+
+//rewrite line 61, to grab a random character from options array
+
+//try in for loop "password+= addUpper etc"
