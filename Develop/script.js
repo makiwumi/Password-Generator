@@ -14,55 +14,79 @@ let length = 0
 
 let password = "";
 
+let results = document.getElementById("password");
+
 generate.onclick = function(){
   getLength();
   getUpper();
   getNumber();
   getSym();
-  };
+
+  results.innerHTML = generatePassword(addUpper,addLower,addNumber,addSymbols, length);
+};
+//print password
+
+function generatePassword(getUpper, hasLower, hasNumber, hasSym, length){
+  let generatesPassword = '';
+
+  let typesCount = getUpper + hasLower + hasNumber + hasSym;
+
+  let typesArr = [{getUpper}, {hasLower}, {hasNumber}, {hasSym}].filter(item => Object.values(item)[0]);
+
+  if(typesCount === 0){
+    alert("Your password must include on character type");
+    return;
+  }
+
+  for (let i = 0; i< length; i+=typesCount){
+    typesArr.forEach(type =>{
+      let btn = Object.keys(type)[0];
+
+      generatesPassword+= ranbtn[btn]();
+    });
+  }
+  console.log(generatesPassword);
+}
+
 
 getLength = function (){
-  let length = prompt("How long would you like your password to be?");
+  let length = prompt("How many characters would you like your password to be?");
   console.log(length);
   
   if (length < 8){
     prompt("Your characters should be more than 8");
   }
   if (length > 128){
-    prompt("less than 128");
+    prompt("Your characters should be 128");
   }
   return length;
 }
 
 getUpper = function(){
-  let haveUpper = confirm("have upper?");
-  console.log(haveUpper);
+  let hasUpper = confirm("Click OK to confirm including uppercase characters");
+  console.log(hasUpper);
 }
 getLower = function(){
-  let haveLower = confirm("have lower");
-  console.log(haveLower);
+  let hasLower = confirm("Click OK to confirm including lowercase characters");
+  console.log(hasLower);
 }
 getNumber = function(){
-  let haveNumber = confirm("have num");
-  console.log(haveNumber);
+  let hasNumber = confirm("Click OK to confirm including numeric characters");
+  console.log(hasNumber);
 }
 getSym = function(){
-  let haveSym = confirm("have sym");
-  console.log(haveSym);
+  let hasSym = confirm("Click OK to confirm including special characters");
+  console.log(hasSym);
 }
 
-function generate(){
-  let options = [];
-  if haveUpper == true;
-    options.push(addUpper)
+if (getUpper === false && getLower === false && getNumber === false && getSym === false) {
+  alert('Your password must include on character type');
+  
+}
 
-}
-for (var i; i < length; i++){
-  password+= option;
-}
 
 //print password
-document.getElementById("password").innerHTML = password;
+
 
 //create options array, push all options in "let option = [fjakjfka]"
 
