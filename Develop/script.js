@@ -1,95 +1,41 @@
-let addUpper = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-console.log(addUpper);
-
-let addLower = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-console.log(addLower);
-
-let addNumber = String.fromCharCode(Math.floor(Math.random()* 10) + 48);
-console.log(addNumber);
-
-let addSymbols = ['!','@','#','$','%','^','&','*','(',')','_','+']; 
-console.log(addSymbols);
-
-let length = 0
-
-let password = "";
-
-let results = document.getElementById("password");
-
-generate.onclick = function(){
-  getLength();
-  getUpper();
-  getNumber();
-  getSym();
-
-  results.innerHTML = generatePassword(addUpper,addLower,addNumber,addSymbols, length);
-};
-//print password
-
-function generatePassword(getUpper, hasLower, hasNumber, hasSym, length){
-  let generatesPassword = '';
-
-  let typesCount = getUpper + hasLower + hasNumber + hasSym;
-
-  let typesArr = [{getUpper}, {hasLower}, {hasNumber}, {hasSym}].filter(item => Object.values(item)[0]);
-
-  if(typesCount === 0){
-    alert("Your password must include on character type");
-    return;
-  }
-
-  for (let i = 0; i< length; i+=typesCount){
-    typesArr.forEach(type =>{
-      let btn = Object.keys(type)[0];
-
-      generatesPassword+= ranbtn[btn]();
-    });
-  }
-  console.log(generatesPassword);
-}
-
-
-getLength = function (){
-  let length = prompt("How many characters would you like your password to be?");
-  console.log(length);
+function generateOptions(){
   
-  if (length < 8){
-    prompt("Your characters should be more than 8");
-  }
-  if (length > 128){
-    prompt("Your characters should be 128");
-  }
-  return length;
+}
+var length = Number(prompt("How many characters would you like your password to be?"));
+while (isNaN(length) || length < 8 || length > 128) length = Number(prompt("Length must be 8-128 characters. How many characters would you like your password to be?"));
+
+var uppers = confirm("Would you like to use uppercase letters?");
+var lowers = confirm("Would you like to use lowercase letters?");
+var numbers = confirm("Would you like to use numbers?");
+var symbols = confirm("Would you like to use special characters?");
+
+while (!uppers && !lowers && !numbers && !symbols) {
+  alert("You must select at least one character type!");
+  uppers = confirm("Would you like to use uppercase letters?");
+  lowers = confirm("Would you like to use lowercase letters?");
+  numbers = confirm("Would you like to use numbers?");
+  symbols = confirm("Would you like to use special characters?");
 }
 
-getUpper = function(){
-  let hasUpper = confirm("Click OK to confirm including uppercase characters");
-  console.log(hasUpper);
-}
-getLower = function(){
-  let hasLower = confirm("Click OK to confirm including lowercase characters");
-  console.log(hasLower);
-}
-getNumber = function(){
-  let hasNumber = confirm("Click OK to confirm including numeric characters");
-  console.log(hasNumber);
-}
-getSym = function(){
-  let hasSym = confirm("Click OK to confirm including special characters");
-  console.log(hasSym);
-}
+window.addEventListener('load', function() {
+  generateNewPassword();
+});
 
-if (getUpper === false && getLower === false && getNumber === false && getSym === false) {
-  alert('Your password must include on character type');
+function generateNewPassword() {
+  var options = generateOptions();
+  var password = "";
+
+  var allowed = {};
+  if (uppers) password += allowed.addUpper;
+  if (lowers) password += allowed.addLower;
+  if (numbers) password += allowed.addNumber;
+  if (symbols) password += allowed.addSym;
+
+  for (var i = password.length; i < length; i++) {
+    password +=Math.floor(Math.random() * allowed);
+  }
   
 }
 
+document.getElementById("password").value = password
 
-//print password
-
-
-//create options array, push all options in "let option = [fjakjfka]"
-
-//rewrite line 61, to grab a random character from options array
-
-//try in for loop "password+= addUpper etc"
